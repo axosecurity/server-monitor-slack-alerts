@@ -1,17 +1,18 @@
 [Unit]
 Description=System Monitor Daemon — Slack Alerts
-Documentation=https://github.com/yourrepo/system-monitor
+Documentation=https://github.com/axosecurity/server-monitor-slack-alerts
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
 User=root
+EnvironmentFile=-/etc/system_monitor/monitor.env
 ExecStart=/usr/bin/python3 /opt/system_monitor/monitor.py
 Restart=always
 RestartSec=10
-StandardOutput=null
-StandardError=null
+StandardOutput=journal
+StandardError=journal
 
 # Resource limits — keep the daemon lean
 CPUQuota=5%
